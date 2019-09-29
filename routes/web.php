@@ -15,14 +15,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('lists/id/{list}',function($id){
-	$list = DB::table('my_lists')->find($id);
-    return view('lists.show',compact('list'));
+Route::get('/lists/id/{list}', function ($id) {
+    $list = \App\MyList::find($id);
+    return view('lists.show', compact('list'));
 });
 
 Route::get('/lists', 'ListsController@index');
 
-Route::get('/lists/create', 'ListsController@create' );
+Route::get('/lists/create', 'ListsController@create');
 
 Route::get('lists/remove', 'ListsController@remove');
 
