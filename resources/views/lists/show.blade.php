@@ -19,12 +19,16 @@
 	</style>
 
 <body>
-	<h2>{{$list->name_of_list}}</h2>
+	<h2>{{$lists->name_of_list}}</h2>
 	<ul>
-		@foreach($list->items as $item)
+		@foreach($lists->items as $item)
 		<li>{{$item->list_item}}</li>
 		@endforeach
 	</ul>
+	<br>
+	<button style="background-color: #45a049;padding: 10px 15px"><a href="/lists/item/create" style="text-decoration: none;color: white;">Create New Task</a></button>
+	<br>
+	<button style="background-color: #bd2424;padding: 10px 15px"><a href="/lists/item/remove" style="text-decoration: none;color: white;">Remove Task</a></button>
 
 </body>
 </html>

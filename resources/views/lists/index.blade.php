@@ -27,7 +27,7 @@
 <h1>Only Names Of Lists</h1>
 <ul>
 @foreach ($my_lists as $list)
-<li><a href="id/{{$list->id}}">{{ $list->name_of_list}}</a></li>
+<li><a href="/lists/id/{{$list->id}}">{{ $list->name_of_list}}</a></li>
 @endforeach
 </ul>
 <br>

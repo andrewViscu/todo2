@@ -30,9 +30,14 @@ class ListsController extends Controller
 
     	return redirect('lists');
     }
+    public function openList($id)
+    {
+    	$lists = myList::find($id);
+    	return view('lists.show', compact('lists'));
+    }
     public function removeList()
     {	$remove_list = request('name2');
-    	
+
     	$find_lists = MyList::where('name_of_list', $remove_list);
     	$find_lists ->delete();
     	return redirect('lists');

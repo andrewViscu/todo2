@@ -15,17 +15,18 @@ class ItemsController extends Controller
     }
         public function create()
     {
-    	return view('lists/items.create');
+    	return view('lists/item.create');
     }
     public function remove()
     {
-    	return view('list/items/remove');
+    	return view('list/item/remove');
     }
     public function storeItem()
     {
     	$item = new Item();
 
     	$item->list_item = request('name3');
+    	$item->my_list_id = request('name5');
     	$item->save();
 
     	return redirect('lists/id/{$list->id}');

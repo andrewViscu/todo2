@@ -49,12 +49,15 @@ input[type=submit]:hover {
         {{ csrf_field() }}
  
        <div>
-          <label >Item Name</label>
-          <input type="text" name="name3" placeholder="Item Name">
+          <label >Task Name</label>
+          <input type="text" name="name3" placeholder="Task Name">
+          <label>ID of List</label>
+          <input type="text" name="name5" placeholder="ID">
+
  
       </div>
       <div>
-            <input type="submit" value="Add Item">
+            <input type="submit" value="Add Task">
       </div>
     </form>
  </div>
