@@ -14,14 +14,14 @@
 			font-family: 'Roboto',sans-serif;
 		}
 		ul{
-			list-style-type:decimal; 
+			list-style-type:decimal;
 		}
 	</style>
 
 <body>
 	<h2>{{$list->name_of_list}}</h2>
 	<ul>
-		@foreach($items as $item)
+		@foreach($list->items as $item)
 		<li>{{$item->list_item}}</li>
 		@endforeach
 	</ul>
