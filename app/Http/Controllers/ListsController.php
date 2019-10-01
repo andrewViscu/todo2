@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\MyList;
 
+
 class ListsController extends Controller
 {
     public function index()
@@ -28,7 +29,7 @@ class ListsController extends Controller
     	$my_list->name_of_list = request('name');
     	$my_list->save();
 
-    	return redirect('lists');
+    	return redirect('lists')->with('status','Лист был успешно добавлен!');
     }
     public function openList($id)
     {
@@ -38,9 +39,15 @@ class ListsController extends Controller
     public function removeList()
     {	$remove_list = request('name2');
 
-    	$find_lists = MyList::where('name_of_list', $remove_list);
-    	$find_lists ->delete();
-    	return redirect('lists');
+    	$find_lists = MyList::where('name_of_list', $remove_list)->first();
+    	if ($find_lists == false){
+    		return redirect('lists/remove')->with('status_error', 'Имя листа было введено неверно!');
+    	}
+    	else{
+			$find_lists ->delete();
+        	return redirect('lists')->with('status2', 'Лист был успешно удален!');
+		}
+
     }
 
 }

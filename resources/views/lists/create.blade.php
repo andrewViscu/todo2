@@ -2,8 +2,9 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 <style>
-body {font-family: Arial, Helvetica, sans-serif;}
+body {font-family: 'Roboto',sans-serif;}
 * {box-sizing: border-box;}
  
 input[type=text], select, textarea {
@@ -22,6 +23,7 @@ input[type=submit] {
   color: white;
   padding: 12px 20px;
   border: none;
+  margin-bottom: 5px;
   border-radius: 4px;
   cursor: pointer;
 }
@@ -34,6 +36,18 @@ input[type=submit]:hover {
   border-radius: 5px;
   background-color: #f2f2f2;
   padding: 20px;
+}
+.back_btn{
+  background-color: #595959;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 5px;
+} 
+.back_btn:hover{
+  background-color: #474747;
 }
 </style>
    
@@ -57,6 +71,9 @@ input[type=submit]:hover {
             <input type="submit" value="Make List">
       </div>
     </form>
+    <form>
+  <input class="back_btn" type="button" value="Back" onclick="history.back()">
+</form>
  </div>
  
 </body>
