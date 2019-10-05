@@ -14,6 +14,9 @@
 		li,a{
 			
 		}
+		li{
+			margin-bottom: 2px;
+		}
 		ul{
 			list-style-type:decimal;
 		}
@@ -29,6 +32,34 @@
 .back_btn:hover{
   background-color: #474747;
 }
+.alert-danger{
+	background-color:#b00c04;
+ 	color:#fff;
+}
+.alert-success{
+	background-color:#68bf52;
+ 	color:#fff;
+}
+.del_edit{
+ 			position: relative;
+ 			float: right;
+ 			padding: 2px 4px;
+ 			color:#fff;
+ 			border: none;
+ 			border-radius: 4px;
+ 			cursor: pointer;
+ 			margin-top: -3px;
+ 			margin-left: 10px;
+ 			margin-bottom: 2px;
+ 		}
+ 		.del_edit a{
+ 			text-decoration: none;
+ 			color: white;
+
+ 		}
+ 		.cross-out{
+ 			text-decoration: line-through;
+ 		}
 
 	</style>
 
@@ -37,7 +68,7 @@
 	<h2>{{$lists->name_of_list}}</h2>
 	<ul>
 		@foreach($lists->items as $item)
-		<li>{{$item->list_item}} <a href="/lists/id/{{$lists->id}}/item/remove/{{$item->id}}">Delete</a></li>
+		<li class="@if ($item->done)cross-out @endif">{{$item->list_item}} <button class="del_edit alert-danger"><a href="/lists/id/{{$lists->id}}/item/remove/{{$item->id}}">Delete</a></button><button class="del_edit alert-success"><a href="/lists/id/{{$lists->id}}/item/done/{{$item->id}}" >Mark as finished</a></button></li>
 		@endforeach
 	</ul>
 	<br>

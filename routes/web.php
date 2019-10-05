@@ -29,6 +29,8 @@ Route::get('/lists/remove/{list}', 'ListsController@remove');
 Route::get('lists/id/{list}/item/create', 'ItemsController@create');
 Route::get('lists/item/remove', 'ItemsController@remove');
 
+Route::get('lists/id/{list}/item/done/{item}', 'ItemsController@done');
+
 
 Route::post('/lists/id/{list}/item/create', 'ItemsController@storeItem');
 Route::get('/lists/id/{list}/item/remove/{item}', 'ItemsController@removeItem');

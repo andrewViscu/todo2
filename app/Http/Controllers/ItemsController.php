@@ -29,7 +29,26 @@ class ItemsController extends Controller
 		if (session('status1')){
 		return redirect('lists/id/' . $list)->with('status', 'Task Have Been Removed Successfuly');
 
+ 			}
  		}
+ 	public function done()
+ 	{	
+ 		$list = request('list');
+ 		$item = request('item');
+ 		$find_item = Item::find($item);
+
+ 		if($find_item && $find_item->done == 0){
+ 			$find_item->update(['done'=> true]);
+ 			return redirect('lists/id/' . $list);
+ 		}
+ 		elseif($find_item && $find_item->done == 1){
+ 			$find_item->update(['done'=> false]);
+ 			return redirect('lists/id/' . $list);
+ 		}
+ 		else{
+ 			dd($find_item->done);
+ 		}
+ 		
     }
     public function storeItem()
     {
