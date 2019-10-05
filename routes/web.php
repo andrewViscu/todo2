@@ -18,17 +18,20 @@ Route::get('/', function () {
 Route::get('/lists/id/{list}', 'ListsController@openList');
 Route::get('/lists', 'ListsController@index');
 Route::get('/lists/create', 'ListsController@create');
-Route::get('lists/remove', 'ListsController@remove');
 
-Route::post('/listaction', 'ListsController@storeList');
-Route::post('/listraction', 'ListsController@removeList');
+Route::get('lists/{list}/edit', 'ListsController@edit');
+Route::post('lists/{list}/edit', 'ListsController@save_edit');
+
+Route::post('/lists/create', 'ListsController@storeList');
+Route::get('/lists/remove/{list}', 'ListsController@remove');
 
 
-Route::get('lists/item/create', 'ItemsController@create');
+Route::get('lists/id/{list}/item/create', 'ItemsController@create');
 Route::get('lists/item/remove', 'ItemsController@remove');
 
-Route::post('/itemaction', 'ItemsController@storeItem');
-Route::post('/itemraction', 'ItemsController@removeItem');
+
+Route::post('/lists/id/{list}/item/create', 'ItemsController@storeItem');
+Route::get('/lists/id/{list}/item/remove/{item}', 'ItemsController@removeItem');
 
 
 

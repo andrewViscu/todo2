@@ -73,6 +73,8 @@ input[type=submit]:hover {
 <div class="alert alert-danger">
   {{session('status_error')}}
 </div>
+ @elseif (session('status'))
+ @redirect()->back()->with('status', Task Have Been Removed Successfuly)
 @endif
 <div id="wrapper">
 	<h1>Remove a Task</h1>

@@ -18,10 +18,6 @@ class ListsController extends Controller
     {
     	return view('lists.create');
     }
-    public function remove()
-    {
-    	return view('lists/remove');
-    }
     public function storeList()
     {
     	$my_list = new myList();
@@ -31,21 +27,45 @@ class ListsController extends Controller
 
     	return redirect('lists')->with('status','Лист был успешно добавлен!');
     }
+    public function edit(Request $request)
+    {
+    	$list = request('list');
+    	
+    	
+    	return view('lists.edit', compact('list'));
+    }
+    public function save_edit()
+    {
+    	$list = request('list');
+    	$new_list_name = request('name3');
+    	$find_list = MyList::find($list);
+    	if ($find_list) {
+    		$find_list->update(['name_of_list'=> $new_list_name]);
+    		return redirect('lists')->with('status_update', 'Имя Листа было обновлено!');
+    	}
+    	else{
+    		return redirect('lists')->with('status_error', 'error');
+    	}
+
+
+    	
+    }
     public function openList($id)
     {
     	$lists = myList::find($id);
     	return view('lists.show', compact('lists'));
     }
-    public function removeList()
-    {	$remove_list = request('name2');
+    public function remove()
+    {	$remove_list = request('list');
 
-    	$find_lists = MyList::where('name_of_list', $remove_list)->first();
-    	if ($find_lists == false){
-    		return redirect('lists/remove')->with('status_error', 'Имя листа было введено неверно!');
+    	$find_lists = MyList::find($remove_list);
+    	if ($find_lists){
+    		$find_lists ->delete();
+        	return redirect('lists')->with('status2', 'Лист был успешно удален!');
+    		
     	}
     	else{
-			$find_lists ->delete();
-        	return redirect('lists')->with('status2', 'Лист был успешно удален!');
+			return redirect('lists')->with('status_error', 'Имя листа было введено неверно!');
 		}
 
     }

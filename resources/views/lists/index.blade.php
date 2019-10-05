@@ -67,6 +67,21 @@
 			cursor: pointer;
 			margin-bottom: 5px;
  		}
+ 		.del_edit{
+ 			position: relative;
+ 			float: right;
+ 			padding: 5px 10px;
+ 			color:#fff;
+ 			border: none;
+ 			border-radius: 4px;
+ 			cursor: pointer;
+ 			margin-top: -3px;
+ 			margin-left: 10px;
+ 		}
+ 		.del_edit a{
+ 			text-decoration: none;
+ 			color: white;
+ 		}
 	</style>
 
 @if (session('status'))
@@ -90,14 +105,11 @@
 <h1>Only Names Of Lists</h1>
 <ul class="lists">
 @foreach ($my_lists as $list)
-<a href="/lists/id/{{$list->id}}"><li>{{ $list->name_of_list}}</li></a>
+<li><a href="/lists/id/{{$list->id}}">{{ $list->name_of_list}}</a><button class="del_edit alert-danger"><a href="/lists/remove/{{$list->id}}/">Delete</a></button><button class="del_edit alert-success"><a href="/lists/{{$list->id}}/edit" >Edit</a></button></li>
 @endforeach
 </ul>
 <br>
 <button style="background-color: #45a049;padding: 10px 15px;color:#fff;margin-bottom: 5px; border: none;border-radius: 4px;cursor: pointer;" ><a href="/lists/create" style="text-decoration: none;color: white;">Create New List</a></button>
-
-<button style="background-color: #bd2424;padding: 10px 15px;color:#fff; border: none;margin-bottom: 5px;border-radius: 4px;cursor: pointer;" value="Remove List"><a href="/lists/remove" style="text-decoration: none;color: white;">Remove List</a></button>
-
 
 
 </div>

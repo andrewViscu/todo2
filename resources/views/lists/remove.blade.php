@@ -75,7 +75,7 @@ input[type=submit]:hover {
 @endif
 <div id="wrapper">
 	<h1>Remove a List</h1>
-	<form method="POST" action="/listraction">
+	<form method="POST" action="/lists/remove">
  
         {{ csrf_field() }}
  

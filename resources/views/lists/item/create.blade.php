@@ -53,22 +53,18 @@ input[type=submit]:hover {
    
 </head>
 <body>
- 
+
 <h1>Create New Task</h1>
  
 <div class="container">
  
-    <form method="POST" action="/itemaction">
+    <form method="POST" action="/lists/id/{{$list}}/item/create">
  
         {{ csrf_field() }}
  
        <div>
           <label >Task Name</label>
           <input type="text" name="name3" placeholder="Task Name">
-          <label>ID of List</label>
-          <input type="text" name="name5" placeholder="ID">
-
- 
       </div>
       <div>
             <input type="submit" value="Add Task" style="margin-bottom: 5px;">
