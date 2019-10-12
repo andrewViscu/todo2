@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\MyList;
+use App\Item;
+
+use Illuminate\Support\Facades\Auth;
 
 
 class ListsController extends Controller
@@ -12,11 +15,22 @@ class ListsController extends Controller
     public function index()
     {
     	$my_lists = MyList::all();
+	if (Auth::check()) {
     	return view('lists.index', compact('my_lists'));
+	}
+	else{
+		return redirect('login')->with('status', 'You are not logged in!');
+	}
+    	
     }
     public function create()
     {
+    if (Auth::check()) {
     	return view('lists.create');
+	}
+	else{
+		return redirect('login')->with('status', 'You are not logged in!');
+	}
     }
     public function storeList()
     {
@@ -31,9 +45,13 @@ class ListsController extends Controller
     {
     	$list = request('list');
     	
-    	
+    if (Auth::check()) {
     	return view('lists.edit', compact('list'));
     }
+	else{
+		return redirect('login')->with('status', 'You are not logged in!');
+	}
+	}
     public function save_edit()
     {
     	$list = request('list');
@@ -53,19 +71,24 @@ class ListsController extends Controller
     public function openList($id)
     {
     	$lists = myList::find($id);
+    	if (Auth::check()) {
     	return view('lists.show', compact('lists'));
+    	}
+    	else{
+		return redirect('login')->with('status', 'You are not logged in!');
+		}
     }
     public function remove()
     {	$remove_list = request('list');
-
     	$find_lists = MyList::find($remove_list);
+
     	if ($find_lists){
-    		$find_lists ->delete();
+    		$find_lists->delete();
         	return redirect('lists')->with('status2', 'Лист был успешно удален!');
     		
     	}
     	else{
-			return redirect('lists')->with('status_error', 'Имя листа было введено неверно!');
+			echo "error";
 		}
 
     }

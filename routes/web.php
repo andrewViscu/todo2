@@ -35,10 +35,9 @@ Route::get('lists/id/{list}/item/done/{item}', 'ItemsController@done');
 Route::post('/lists/id/{list}/item/create', 'ItemsController@storeItem');
 Route::get('/lists/id/{list}/item/remove/{item}', 'ItemsController@removeItem');
 
+Route::get('lists/id/{list}/item/edit/{item}', 'ItemsController@edit');
+Route::post('lists/id/{list}/item/edit/{item}', 'ItemsController@save_edit');
 
+Auth::routes();
 
-
-
-
-
-
+Route::get('/home', 'HomeController@index')->name('home');

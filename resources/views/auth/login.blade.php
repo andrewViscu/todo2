@@ -1,7 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
+@if (session('status'))
+<div class="alert alert-danger">
+    {{session('status')}}
+</div>
+@endif
+
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -21,6 +28,7 @@
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
+                                    
                                 @enderror
                             </div>
                         </div>
@@ -35,6 +43,7 @@
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
+                                    
                                 @enderror
                             </div>
                         </div>
