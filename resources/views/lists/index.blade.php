@@ -17,18 +17,33 @@
 <div id="wrapper">
 <h1>All Information About Lists</h1>
 <ul  class="lists">
-@foreach ($my_lists as $list)
-<li> {{ $list}}  </li>
-@endforeach
+	@foreach ($my_lists as $list)
+	<li> {{$list}}  </li>
+	@endforeach
 </ul>
 <h1>Only Names Of Lists</h1>
 <ul class="lists">
-@foreach ($my_lists as $list)
-<li><a href="/lists/id/{{$list->id}}">{{ $list->name_of_list}}</a><button class="btn btn-danger" style="float:right;margin-right:5px;"><a href="/lists/remove/{{$list->id}}/" style="color:#fff;">Delete</a></button><button class="btn btn-success" style="float:right;margin-right: 5px;"><a href="/lists/{{$list->id}}/edit" style="color:#fff;" >Edit</a></button></li>
-@endforeach
+	@foreach ($my_lists as $list)
+	<li class="mb-2">
+		<a href="/lists/id/{{$list->id}}">
+			{{ $list->name_of_list}}
+		</a>
+
+		<form action="/lists/remove/{{$list->id}}" method="get">
+			<input class="btn btn-danger btn-sm"  style="float:right;margin-right:5px;" type="submit" value="Delete">
+		</form>
+
+		<form action="/lists/{{$list->id}}/edit" method="get">
+			<input class="btn btn-success btn-sm" style="float:right;margin-right: 5px;" type="submit" value="Edit">
+		</form>
+
+	</li>
+	@endforeach
 </ul>
 <br>
-<button class="btn btn-success" style="margin-bottom: 5px;" ><a href="/lists/create" style="text-decoration: none;color: white;">Create New List</a></button>
+<form action="/lists/create" method="get">
+	<input class="btn btn-success" style="margin-bottom: 5px;" type="submit" value="Create New List">
+</form>
 
 
 </div>

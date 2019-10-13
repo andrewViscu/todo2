@@ -44,9 +44,10 @@ class ListsController extends Controller
     public function edit(Request $request)
     {
     	$list = request('list');
+    	$lists = MyList::find($list);
     	
     if (Auth::check()) {
-    	return view('lists.edit', compact('list'));
+    	return view('lists.edit', compact('list', 'lists'));
     }
 	else{
 		return redirect('login')->with('status', 'You are not logged in!');

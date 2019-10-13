@@ -10,16 +10,14 @@
  
        <div>
           <label >Edit List Name</label>
-          <input type="text"  class="form-control" name="name3" placeholder="New List Name">
+          <input type="text"  class="form-control" name="name3" placeholder="New List Name" value="{{$lists->name_of_list}}">
       </div>
       <div>
             <input type="submit" class="btn btn-primary" value="Save List" style="margin-top: 5px;">
       </div>
     </form>
-  <button class="btn btn-default" style="background-color: #777;display: block;margin: 5px 0" type="button">
-  	<a href="/lists" style="color:#fff;">
-  	Back
-  </a>
-</button>
+    <form action="/lists">
+  <input class="btn btn-default" style="background-color: #777;display: block;margin: 5px 0; color:#fff;" type="submit" value="Back">
+</form>
  </div>
  @endsection

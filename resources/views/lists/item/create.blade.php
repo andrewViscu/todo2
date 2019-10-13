@@ -16,11 +16,9 @@
             <input type="submit" class="btn btn-success"  value="Add Task" style="margin-top: 5px;">
       </div>
     </form>
-     <button class="btn btn-default" style="background-color: #777;display: block;margin: 5px 0" type="button">
-      <a href="/lists/id/{{$list}}" style="color:#fff;">
-      Back
-    </a>
-  </button>
+    <form action="/lists/id/{{$list}}" method="get">
+     <input class="btn btn-default" style="background-color: #777;display: block;margin: 5px 0;color:#fff;" type="submit" value="Back">
+    </form>
  </div>
  
 @endsection

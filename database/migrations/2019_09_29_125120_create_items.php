@@ -15,9 +15,11 @@ class CreateItems extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('my_list_id');
+            $table->integer('my_list_id')->unsigned();
+            $table->foreign('my_list_id')->references('id')->on('lists')->onDelete('cascade');
             $table->text('list_item');
-            $table->boolean('done');
+            $table->boolean('done')->default(0);
+
             $table->timestamps();
         });
     }

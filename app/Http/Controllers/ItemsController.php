@@ -63,9 +63,10 @@ class ItemsController extends Controller
     {
     	$list = request('list');
     	$item = request('item');
+    	$items = Item::find($item);
     	
     if (Auth::check()) {
-    	return view('lists/item.edit', compact('list','item'));
+    	return view('lists/item.edit', compact('list','item','items'));
     }
 	else{
 		return redirect('login')->with('status', 'You are not logged in!');
@@ -81,7 +82,7 @@ class ItemsController extends Controller
     	if ($find_item) {
     		$find_item->update(['list_item' => $new_item_name]);
     		
-    		return redirect('/lists/id/' . $list)->with('status_update', 'Имя Задачи было обновлено!'. $find_item->list_item);
+    		return redirect('/lists/id/' . $list)->with('status_update', 'Имя Задачи было обновлено!');
     	}
     	else{
     		return redirect('lists/id/' . $list)->with('status_error', 'An Error Ocurred');
