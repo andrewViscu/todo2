@@ -32,7 +32,7 @@
 		<input class="btn btn-success" style="display: block;margin: 5px 0;" type="submit" value="Create New Task">
 	</form>
 	<form action="/lists" method="get">
-		<input class="btn bnt-default" style="background-color: #777;display: block;margin: 5px 0;color:#fff;" type="submit" value="Back">
+		<input class="btn" style="background-color: #777;display: block;margin: 5px 0;color:#fff;:hover{background-color: #666;}" type="submit" value="Back">
 	</form>
 </div>
 

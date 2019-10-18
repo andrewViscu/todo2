@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\MyList;
 use App\Item;
+use Validator;
+
 
 use Illuminate\Support\Facades\Auth;
 
@@ -32,15 +34,29 @@ class ListsController extends Controller
 		return redirect('login')->with('status', 'You are not logged in!');
 	}
     }
-    public function storeList()
+    public function storeList(Request $request)
     {
+    	$rules = [
+    		'name_of_list' => 'required|max:255',
+    	];
+
+    	
     	$my_list = new myList();
 
     	$my_list->name_of_list = request('name');
+    	$validator = Validator::make(
+    		['name_of_list' => $my_list->name_of_list],
+    		['name_of_list' =>'required|max:255'],
+    	);
+    	if($validator->fails()) {
+    		return redirect('lists/create')->with('status', 'Отсутствует название листа');
+    	}
+    	else{
     	$my_list->save();
-
-    	return redirect('lists')->with('status','Лист был успешно добавлен!');
+    		return redirect('lists')->with('status','Лист был успешно добавлен!');
+    	}
     }
+
     public function edit(Request $request)
     {
     	$list = request('list');

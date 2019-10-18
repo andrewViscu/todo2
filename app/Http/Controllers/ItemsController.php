@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Item;
-
 use App\MyList;
+use Validator;
 
 use Illuminate\Support\Facades\Auth;
+
+
 
 class ItemsController extends Controller
 {
@@ -95,9 +97,18 @@ class ItemsController extends Controller
 
     	$item->list_item = request('name3');
     	$item->my_list_id = request('list');
-    	$item->save();
-		
-    	return redirect('lists/id/' . $list)->with('status1', 'Task Have Been Removed Successful');
+    	$validator = Validator::make(
+    		['list_item' => $item->list_item],
+    		['list_item' => 'required|max:255'],
+    	);
+    	if($validator->fails())
+    	{
+    		return redirect('/lists/id/' . $list . '/item/create')->with('status', 'Пустое имя задачи');
+    	}
+    	else{
+    		$item->save();
+    		return redirect('lists/id/' . $list)->with('status1', 'Task Have Been Removed Successful');
+    	}
     }
     public function removeItem()
     {	$remove_item = request('item');

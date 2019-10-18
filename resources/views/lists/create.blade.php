@@ -3,10 +3,26 @@
 @section('content')
 
 <div class="container">
- 
+
+  
+  @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @elseif(session('status'))
+    <div class=" alert alert-danger">
+      <p>{{session('status')}}</p>
+    </div>
+  @endif
     <form method="POST" action="/lists/create">
  
         {{ csrf_field() }}
+
+
  
        <div>
           <label >List Name</label>

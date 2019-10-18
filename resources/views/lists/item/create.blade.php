@@ -5,7 +5,11 @@
 <div class="container">
  
     <form method="POST" action="/lists/id/{{$list}}/item/create">
- 
+  @if(session('status'))
+    <div class=" alert alert-danger">
+      <p>{{session('status')}}</p>
+    </div>
+  @endif
         {{ csrf_field() }}
  
        <div>
