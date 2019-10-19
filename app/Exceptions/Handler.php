@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\URL;
 
 class Handler extends ExceptionHandler
 {
@@ -46,6 +47,21 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($this->isHttpException($exception)) {
+            if ($exception->getStatusCode() == 404) {
+                $url = url()->current();
+                $url_len = strlen($url);
+                if($url_len > 50)
+                {
+                    $trimmed_url = rtrim(mb_strimwidth($url, 0, 50, '', 'UTF-8')). '...';
+                    return response()->view('errors.' . '404',compact('url','url_len','trimmed_url'), 404, );
+                }
+                else{
+                    return response()->view('errors.' . '404',compact('url','url_len'), 404, );
+                }
+        }
+    }
+
         return parent::render($request, $exception);
     }
 }

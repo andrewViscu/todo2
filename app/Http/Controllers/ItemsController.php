@@ -55,16 +55,19 @@ class ItemsController extends Controller
  			$find_item->update(['done'=> true]);
  			return redirect('lists/id/' . $list);
  		}
- 		else{
+ 		elseif($find_item && $find_item->done == 0){
  			$find_item->update(['done'=> false]);
  			return redirect('lists/id/' . $list);
+ 		}
+ 		else{
+ 			abort(404);
  		}
  		
     }
     public function edit()
     {
-    	$list = request('list');
-    	$item = request('item');
+    	$list  = request('list');
+    	$item  = request('item');
     	$items = Item::find($item);
     	
     if (Auth::check()) {
@@ -76,11 +79,20 @@ class ItemsController extends Controller
     }
     public function save_edit()
     {
-    	$item = request('item');
-    	$list = request('list');
+    	$item           = request('item');
+    	$list           = request('list');
+    	$new_item_name  = request('name3');
+    	$find_item      = Item::find($item);		
 
-    	$new_item_name = request('name3');
-    	$find_item = Item::find($item);
+    	$validator      = Validator::make(
+    		['list_item' => $new_item_name],
+    		['list_item' => 'required|max:255']
+    	);
+    	if($validator->fails())
+    	{
+    		return redirect('/lists/id/' . $list . '/item/edit/' . $item)->withErrors($validator);
+    	}
+
     	if ($find_item) {
     		$find_item->update(['list_item' => $new_item_name]);
     		
@@ -97,13 +109,10 @@ class ItemsController extends Controller
 
     	$item->list_item = request('name3');
     	$item->my_list_id = request('list');
-    	$validator = Validator::make(
-    		['list_item' => $item->list_item],
-    		['list_item' => 'required|max:255'],
-    	);
+    	$validator = Validator::make(['list_item' => $item->list_item],['list_item' => 'required|max:255']);
     	if($validator->fails())
     	{
-    		return redirect('/lists/id/' . $list . '/item/create')->with('status', 'Пустое имя задачи');
+    		return redirect()->back()->withErrors($validator)->withInput();
     	}
     	else{
     		$item->save();

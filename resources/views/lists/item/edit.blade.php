@@ -3,6 +3,15 @@
 @section('content')
 
 <div class="container">
+	@if($errors->any())
+  <div class="alert alert-danger">
+  	<ul class="mb-0">
+  	@foreach($errors->all() as $error)
+  	<li>{{$error}}</li>
+  	@endforeach
+  </ul>
+  </div>
+  @endif
 	<form method="POST" action="/lists/id/{{$list}}/item/edit/{{$item}}">
  
         {{ csrf_field() }}
@@ -13,7 +22,6 @@
           <input type="text"  class="form-control" name="name3" placeholder="New Task Name" value="{{$items->list_item}}">
       </div>
       <div>
-      	<p></p>
             <input type="submit" class="btn btn-primary" value="Save Task" style="margin-top: 5px;">
       </div>
     </form>

@@ -5,18 +5,14 @@
 <div class="container">
 
   
-  @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @elseif(session('status'))
-    <div class=" alert alert-danger">
-      <p>{{session('status')}}</p>
-    </div>
+  @if($errors->any())
+  <div class="alert alert-danger">
+    <ul class="mb-0">
+    @foreach($errors->all() as $error)
+    <li>{{$error}}</li>
+    @endforeach
+  </ul>
+  </div>
   @endif
     <form method="POST" action="/lists/create">
  
