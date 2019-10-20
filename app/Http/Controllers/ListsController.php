@@ -95,7 +95,12 @@ class ListsController extends Controller
     {
     	$lists = myList::find($id);
     	if (Auth::check()) {
-    	return view('lists.show', compact('lists'));
+    		if($lists){
+		    	return view('lists.show', compact('lists'));
+    		}
+    		else{
+    			abort(404);
+    		}
     	}
     	else{
 		return redirect('login')->with('status', 'You are not logged in!');

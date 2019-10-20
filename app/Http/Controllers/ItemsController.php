@@ -71,7 +71,12 @@ class ItemsController extends Controller
     	$items = Item::find($item);
     	
     if (Auth::check()) {
-    	return view('lists/item.edit', compact('list','item','items'));
+    	if($items){
+	    	return view('lists/item.edit', compact('list','item','items'));
+	    }
+	    else{
+	    	abort(404);
+	    }
     }
 	else{
 		return redirect('login')->with('status', 'You are not logged in!');
